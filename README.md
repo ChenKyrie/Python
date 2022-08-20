@@ -1,4 +1,7 @@
 # Python
 Learn Python
 
-學習爬蟲中
+學習selenium  
+
+Action Chains 自動玩網頁遊戲
+爬取ig關鍵字圖片
