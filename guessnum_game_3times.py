@@ -1,41 +1,36 @@
 # -*- coding: utf-8 -*-
 import random
 
-#定義變數最大最小值
-numMix = 1
-numMax = 10
+num_mix = 1
+num_max = 10
 
-#i值讓while跑次數用
-i = 3
+print('歡迎來到猜數字遊戲')
+print(f'謎底為{num_mix}-{num_max}隨機的一個整數(最多五次猜測機會)')
 
-#用random函數生成隨機數介於兩個變數之間
-a = random.randint(numMix, numMax)
 
-#測試先得知a值
-print(a)
+gusscoun = 0
+boom = random.randint(num_mix, num_max)
+print(boom)
 
-#定義None進入while迴圈
-num1 = None
+while True:
+    gusscoun += 1
+    if gusscoun >= 6:
+        print(f'你輸了~超出猜測次數\n謎底為{boom}')
+        break
+    print(f'第{gusscoun}次猜測')
+    user_guss = input('請輸入猜測的數字:')
+    if user_guss.isdigit():
+        user_guss = int(user_guss)
+    else:
+        print('只能是整數')
+        continue
+    if user_guss < boom:
+        num_mix = user_guss
+        print(f'{num_mix}-{num_max}之間')
+    elif user_guss > boom:
+        num_max = user_guss
+        print(f'{num_mix}-{num_max}之間')  
+    else: #user_guss == boom:
+        print('恭喜你猜對了')
+        break
 
-#while處理猜錯並且次數>0
-while num1 != a and i > 0 :
-    
-    #讓用戶輸入值 = num1,使用format賦予變數更靈活取得值還有剩餘次數
-    num1 = int(input('請輸入{numMix}-{numMax}的數,剩餘{i}次機會:'.format(numMix=numMix,numMax=numMax,i=i)))
-    #次數每次迴圈都減1
-    i -= 1
-    #只要用戶輸入值大於a,更動numMax值.縮小範圍
-    if num1 > a :
-        numMax = num1
-        #print(numMix,'-',numMax,'之間')
-    #只要用戶輸入值小於a,更動numMax值.縮小範圍
-    elif num1 < a :
-        numMix = num1
-        #print(numMix,'-',numMax,'之間')
-print('----------------------------------------')    
-
-#if處理結果
-if num1 == a :
-    print('恭喜你猜對了答案是',a)
-else :
-    print('次數用完了!答案是',a)
